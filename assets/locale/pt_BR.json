@@ -13,9 +13,19 @@
       "zebra",
       "leao",
       "hipopotamo",
-      "tigre"
+      "tigre",
+      "rinoceronte"
     ],
-    "Comida": ["arroz", "feijao", "pizza", "macarrao", "alface", "bife"],
+    "Comida": [
+      "arroz",
+      "feijao",
+      "pizza",
+      "macarrao",
+      "alface",
+      "bife",
+      "salada",
+      "pao"
+    ],
     "Cor": [
       "amarelo",
       "azul",
@@ -50,9 +60,47 @@
       "italia",
       "espanha",
       "inglaterra",
-      "australia"
+      "australia",
+      "alemanha"
     ],
-    "Flor": ["rosa", "tulipa"],
-    "Marca": ["apple", "motorola", "nike", "coca cola", "samsung"]
+    "Flor": [
+      "rosa",
+      "tulipa",
+      "cravo",
+      "orquidea",
+      "bromelia",
+      "camelia",
+      "dente de leao",
+      "erva doce",
+      "lotus",
+      "hibisco",
+      "iris",
+      "jasmim",
+      "lavanda",
+      "lirio",
+      "papoila",
+      "petunia",
+      "violeta"
+    ],
+    "Marca": [
+      "apple",
+      "motorola",
+      "nike",
+      "coca cola",
+      "samsung",
+      "fiat",
+      "google",
+      "sony",
+      "ferrari",
+      "pepsi",
+      "nokia",
+      "volkswagen",
+      "colgate",
+      "chevrolet",
+      "rolex",
+      "bayer",
+      "avon",
+      "petrobras"
+    ]
   }
 }
