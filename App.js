@@ -7,9 +7,11 @@ import {
   TouchableOpacity,
   Image,
   BackHandler,
+  StatusBar,
 } from "react-native";
 import { AppLoading } from "expo";
 import { useFonts } from "@use-expo/font";
+import { Ionicons } from "@expo/vector-icons";
 // Assets
 import * as localeEnglish from "./assets/locale/en_US.json";
 import * as localePortuguese from "./assets/locale/pt_BR.json";
@@ -39,6 +41,7 @@ export default function App() {
   const [usedLetters, setUsedLetters] = React.useState([]);
   const [locale, setLocale] = React.useState(localeEnglish);
   const [logoClickCount, setLogoClickCount] = React.useState(0);
+  const [score, setScore] = React.useState(0);
 
   BackHandler.addEventListener("hardwareBackPress", () => {
     if (word !== null) {
@@ -104,8 +107,9 @@ export default function App() {
     return word;
   };
 
-  const startNewGame = () => {
+  const startNewGame = (lastGameScore) => {
     setUsedLetters([]);
+    setScore(score + lastGameScore);
     setWord(getRandomWord());
   };
 
@@ -121,7 +125,10 @@ export default function App() {
     const replayButton = () => {
       if (won || mistakes >= 6) {
         return (
-          <TouchableOpacity style={guessingStyle.button} onPress={startNewGame}>
+          <TouchableOpacity
+            style={guessingStyle.button}
+            onPress={() => startNewGame(won ? 1 : 0)}
+          >
             <Text style={guessingStyle.buttonText}>
               {locale.Menu.playAgain}
             </Text>
@@ -136,9 +143,38 @@ export default function App() {
       return man6;
     };
 
+    const handleHelp = () => {
+      if (score === 0) return;
+      const letter = word.word
+        .split("")
+        .find((letter) => !usedLetters.includes(letter));
+      if (letter === undefined) return;
+      setScore(score - 1);
+      setUsedLetters([...usedLetters, letter]);
+    };
+
     return (
       <View style={guessingStyle.container}>
+        <StatusBar barStyle={"dark-content"} hidden={true} />
         <Text style={guessingStyle.category}>{word.category}</Text>
+        <Text style={guessingStyle.score}>
+          {locale.Menu.score}: {score}
+        </Text>
+        <TouchableOpacity
+          style={guessingStyle.helpContainer}
+          disabled={score === 0}
+          onPress={handleHelp}
+        >
+          <Ionicons
+            size={25}
+            style={
+              score === 0
+                ? guessingStyle.helpIconDisabled
+                : guessingStyle.helpIcon
+            }
+            name="md-help"
+          />
+        </TouchableOpacity>
         <Image source={getManImage()} style={guessingStyle.man} />
         <Text style={guessingStyle.word}>
           {word.word
@@ -168,10 +204,14 @@ export default function App() {
 
   return (
     <View style={homepageStyles.container}>
+      <StatusBar backgroundColor={"#C0FFEE"} barStyle={"dark-content"} />
       <TouchableOpacity onPress={handleLogoClick}>
         <Image source={logo} style={homepageStyles.logo} />
       </TouchableOpacity>
-      <TouchableOpacity style={homepageStyles.button} onPress={startNewGame}>
+      <TouchableOpacity
+        style={homepageStyles.button}
+        onPress={() => startNewGame(0)}
+      >
         <Text style={homepageStyles.buttonText}>{locale.Menu.start}</Text>
       </TouchableOpacity>
     </View>
@@ -217,6 +257,24 @@ const guessingStyle = StyleSheet.create({
     top: 50,
     fontSize: 40,
   },
+  score: {
+    position: "absolute",
+    top: 5,
+    left: 10,
+    fontSize: 25,
+  },
+  helpContainer: {
+    position: "absolute",
+    top: 5,
+    right: 10,
+    backgroundColor: "#ffeaa7",
+    borderRadius: 100,
+    paddingHorizontal: 15,
+    paddingVertical: 2,
+  },
+  helpIconDisabled: {
+    opacity: 0.1,
+  },
   button: {
     backgroundColor: "#05c46b",
     paddingHorizontal: 15,
@@ -236,7 +294,7 @@ const guessingStyle = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     position: "absolute",
-    bottom: 10,
+    bottom: 5,
     alignItems: "center",
     justifyContent: "center",
   },

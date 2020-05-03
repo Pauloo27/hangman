@@ -1,7 +1,8 @@
 {
   "Menu": {
     "start": "Jogar",
-    "playAgain": "Jogar novamente"
+    "playAgain": "Jogar novamente",
+    "score": "Pontos"
   },
   "Words": {
     "Animal": [

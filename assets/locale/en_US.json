@@ -1,7 +1,8 @@
 {
   "Menu": {
     "start": "Start",
-    "playAgain": "Play again"
+    "playAgain": "Play again",
+    "score": "Score"
   },
   "Words": {
     "Animal": ["dog", "cat", "bat", "horse", "cow", "zebra"],
