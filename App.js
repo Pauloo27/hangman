@@ -28,6 +28,7 @@ export default function App() {
   const [word, setWord] = React.useState(null);
   const [usedLetters, setUsedLetters] = React.useState([]);
   const [locale, setLocale] = React.useState(localeEnglish);
+  const [logoClickCount, setLogoClickCount] = React.useState(0);
 
   if (locale !== localePortuguese && Localization.locale == "pt-BR")
     setLocale(localePortuguese);
@@ -125,9 +126,21 @@ export default function App() {
     );
   }
 
+  const handleLogoClick = () => {
+    if (logoClickCount === 8) {
+      setLogoClickCount(1);
+      return;
+    }
+    setLogoClickCount(logoClickCount + 1);
+    if (logoClickCount == 3) setLocale(localePortuguese);
+    if (logoClickCount == 7) setLocale(localeEnglish);
+  };
+
   return (
     <View style={homepageStyles.container}>
-      <Image source={logo} style={homepageStyles.logo} />
+      <TouchableOpacity onPress={handleLogoClick}>
+        <Image source={logo} style={homepageStyles.logo} />
+      </TouchableOpacity>
       <TouchableOpacity style={homepageStyles.button} onPress={startNewGame}>
         <Text style={homepageStyles.buttonText}>{locale.Menu.start}</Text>
       </TouchableOpacity>
