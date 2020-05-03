@@ -1,6 +1,13 @@
 import React from "react";
 import * as Localization from "expo-localization";
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  BackHandler,
+} from "react-native";
 import { AppLoading } from "expo";
 import { useFonts } from "@use-expo/font";
 import * as localeEnglish from "./assets/locale/en_US.json";
@@ -29,6 +36,15 @@ export default function App() {
   const [usedLetters, setUsedLetters] = React.useState([]);
   const [locale, setLocale] = React.useState(localeEnglish);
   const [logoClickCount, setLogoClickCount] = React.useState(0);
+
+  BackHandler.addEventListener("hardwareBackPress", () => {
+    if (word !== null) {
+      setWord(null);
+      return true;
+    } else {
+      BackHandler.exitApp();
+    }
+  });
 
   if (locale !== localePortuguese && Localization.locale == "pt-BR")
     setLocale(localePortuguese);
