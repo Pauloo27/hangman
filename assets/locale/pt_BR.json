@@ -26,7 +26,8 @@
       "cinza",
       "dourado",
       "preto",
-      "laranja"
+      "laranja",
+      "branco"
     ],
     "Lugar": [
       "sao paulo",
@@ -36,7 +37,22 @@
       "espirito santo",
       "curitiba",
       "paris",
-      "roma"
-    ]
+      "roma",
+      "russia",
+      "africa",
+      "brasil",
+      "peru",
+      "argentina",
+      "chile",
+      "mexico",
+      "america",
+      "europa",
+      "italia",
+      "espanha",
+      "inglaterra",
+      "australia"
+    ],
+    "Flor": ["rosa", "tulipa"],
+    "Marca": ["apple", "motorola", "nike", "coca cola", "samsung"]
   }
 }
