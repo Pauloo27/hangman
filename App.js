@@ -88,7 +88,7 @@ export default function App() {
   return (
     <View style={homepageStyles.container}>
       <Image source={logo} style={homepageStyles.logo} />
-      <TouchableOpacity style={homepageStyles.button} onPress={startNewGame()}>
+      <TouchableOpacity style={homepageStyles.button} onPress={startNewGame}>
         <Text style={homepageStyles.buttonText}>Start</Text>
       </TouchableOpacity>
     </View>
