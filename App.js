@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { AppLoading } from "expo";
 import { useFonts } from "@use-expo/font";
+// Assets
 import * as localeEnglish from "./assets/locale/en_US.json";
 import * as localePortuguese from "./assets/locale/pt_BR.json";
 import logo from "./assets/logo.png";
@@ -40,13 +41,13 @@ export default function App() {
   BackHandler.addEventListener("hardwareBackPress", () => {
     if (word !== null) {
       setWord(null);
-      return true;
     } else {
       BackHandler.exitApp();
     }
+    return true;
   });
 
-  if (locale !== localePortuguese && Localization.locale == "pt-BR")
+  if (Localization.locale == "pt-BR" && locale !== localePortuguese)
     setLocale(localePortuguese);
 
   let [fontsLoaded] = useFonts({
@@ -84,7 +85,7 @@ export default function App() {
     for (const category in locale.Words) {
       if (category !== "default") {
         locale.Words[category].forEach((word) => {
-          words.push({ word, category });
+          words.push({ word: word.toLowerCase(), category });
         });
       }
     }
@@ -102,6 +103,7 @@ export default function App() {
     ).length;
     const won = word.word
       .split("")
+      .filter((letter) => letter !== " ")
       .every((letter) => usedLetters.includes(letter));
 
     const replayButton = () => {
