@@ -1,13 +1,36 @@
 import React from "react";
+import * as Localization from "expo-localization";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import { AppLoading } from "expo";
 import { useFonts } from "@use-expo/font";
+import * as localeEnglish from "./assets/locale/en_US.json";
+import * as localePortuguese from "./assets/locale/pt_BR.json";
 import logo from "./assets/logo.png";
-import * as wordList from "./assets/words.json";
+import man0 from "./assets/man/0.png";
+import man1 from "./assets/man/1.png";
+import man2 from "./assets/man/2.png";
+import man3 from "./assets/man/3.png";
+import man4 from "./assets/man/4.png";
+import man5 from "./assets/man/5.png";
+import man6 from "./assets/man/6.png";
+
+const images = {
+  0: man0,
+  1: man1,
+  2: man2,
+  3: man3,
+  4: man4,
+  5: man5,
+  6: man6,
+};
 
 export default function App() {
   const [word, setWord] = React.useState(null);
   const [usedLetters, setUsedLetters] = React.useState([]);
+  const [locale, setLocale] = React.useState(localeEnglish);
+
+  if (locale !== localePortuguese && Localization.locale == "pt-BR")
+    setLocale(localePortuguese);
 
   let [fontsLoaded] = useFonts({
     Pacifico: require("./assets/Pacifico-Regular.ttf"),
@@ -15,7 +38,7 @@ export default function App() {
 
   if (!fontsLoaded) return <AppLoading />;
 
-  const getAlphabet = () => {
+  const getAlphabet = (disabled) => {
     const letters = [..."abcdefghijklmnopqrstuvwxyz"];
     return letters.map((letter) => (
       <TouchableOpacity
@@ -24,7 +47,7 @@ export default function App() {
           setUsedLetters([...usedLetters, letter]);
         }}
         style={guessingStyle.letterButton}
-        disabled={usedLetters.includes(letter)}
+        disabled={usedLetters.includes(letter) || disabled}
       >
         <Text
           style={
@@ -41,9 +64,9 @@ export default function App() {
 
   const getRandomWord = () => {
     const words = [];
-    for (const category in wordList) {
+    for (const category in locale.Words) {
       if (category !== "default") {
-        wordList[category].forEach((word) => {
+        locale.Words[category].forEach((word) => {
           words.push({ word, category });
         });
       }
@@ -57,20 +80,35 @@ export default function App() {
   };
 
   if (word !== null) {
-    const replayButton = () => {
-      if (!word.word.split("").every((letter) => usedLetters.includes(letter)))
-        return null;
+    const mistakes = usedLetters.filter(
+      (letter) => word.word.indexOf(letter) === -1
+    ).length;
+    const won = word.word
+      .split("")
+      .every((letter) => usedLetters.includes(letter));
 
-      return (
-        <TouchableOpacity style={homepageStyles.button} onPress={startNewGame}>
-          <Text style={homepageStyles.buttonText}>Play again</Text>
-        </TouchableOpacity>
-      );
+    const replayButton = () => {
+      if (won || mistakes >= 6) {
+        return (
+          <TouchableOpacity style={guessingStyle.button} onPress={startNewGame}>
+            <Text style={guessingStyle.buttonText}>
+              {locale.Menu.playAgain}
+            </Text>
+          </TouchableOpacity>
+        );
+      }
+      return null;
+    };
+
+    const getManImage = () => {
+      if (mistakes in images) return images[mistakes];
+      return man6;
     };
 
     return (
       <View style={guessingStyle.container}>
         <Text style={guessingStyle.category}>{word.category}</Text>
+        <Image source={getManImage()} style={guessingStyle.man} />
         <Text style={guessingStyle.word}>
           {word.word
             .split("")
@@ -80,7 +118,9 @@ export default function App() {
             .join(" ")}
         </Text>
         {replayButton()}
-        <View style={guessingStyle.lettersContainer}>{getAlphabet()}</View>
+        <View style={guessingStyle.lettersContainer}>
+          {getAlphabet(mistakes >= 6 || won)}
+        </View>
       </View>
     );
   }
@@ -89,7 +129,7 @@ export default function App() {
     <View style={homepageStyles.container}>
       <Image source={logo} style={homepageStyles.logo} />
       <TouchableOpacity style={homepageStyles.button} onPress={startNewGame}>
-        <Text style={homepageStyles.buttonText}>Start</Text>
+        <Text style={homepageStyles.buttonText}>{locale.Menu.start}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -134,6 +174,16 @@ const guessingStyle = StyleSheet.create({
     top: 50,
     fontSize: 40,
   },
+  button: {
+    backgroundColor: "#05c46b",
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderRadius: 100,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 32,
+  },
   word: {
     fontSize: 35,
     fontFamily: "Pacifico",
@@ -143,7 +193,7 @@ const guessingStyle = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     position: "absolute",
-    bottom: 20,
+    bottom: 10,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -165,5 +215,9 @@ const guessingStyle = StyleSheet.create({
     fontSize: 30,
     color: "white",
     opacity: 0.1,
+  },
+  man: {
+    width: 170,
+    resizeMode: "contain",
   },
 });
