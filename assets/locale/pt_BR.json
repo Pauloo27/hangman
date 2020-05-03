@@ -14,7 +14,22 @@
       "leao",
       "hipopotamo",
       "tigre",
-      "rinoceronte"
+      "rinoceronte",
+      "girafa",
+      "rato",
+      "coelho",
+      "cobra",
+      "urso",
+      "raposa",
+      "coala",
+      "gamba",
+      "javali",
+      "capivara",
+      "anta",
+      "jacare",
+      "macaco",
+      "lontra",
+      "pinguim"
     ],
     "Comida": [
       "arroz",
@@ -24,7 +39,13 @@
       "alface",
       "bife",
       "salada",
-      "pao"
+      "pao",
+      "lasanha",
+      "brigadeiro",
+      "bombom",
+      "beijinho",
+      "gelatina",
+      "pudim"
     ],
     "Cor": [
       "amarelo",
@@ -80,7 +101,8 @@
       "lirio",
       "papoila",
       "petunia",
-      "violeta"
+      "violeta",
+      "margarida"
     ],
     "Marca": [
       "apple",
