@@ -3,9 +3,7 @@
     "name": "hangman",
     "slug": "hangman",
     "platforms": [
-      "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,8 +19,8 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "package": "com.github.pauloo27.hangman"
     }
   }
 }
