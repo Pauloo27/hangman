@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
-import logo from "./assets/icon.png";
+import logo from "./assets/logo.png";
 import * as wordList from "./assets/words.json";
 
 export default function App() {
