@@ -1,11 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import { AppLoading } from "expo";
+import { useFonts } from "@use-expo/font";
 import logo from "./assets/logo.png";
 import * as wordList from "./assets/words.json";
 
 export default function App() {
   const [word, setWord] = React.useState(null);
   const [usedLetters, setUsedLetters] = React.useState([]);
+
+  let [fontsLoaded] = useFonts({
+    Pacifico: require("./assets/Pacifico-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) return <AppLoading />;
 
   const getAlphabet = () => {
     const letters = [..."abcdefghijklmnopqrstuvwxyz"];
@@ -76,7 +84,7 @@ export default function App() {
 const homepageStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#C0FFEE",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -85,13 +93,13 @@ const homepageStyles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    backgroundColor: "#2FFAC3",
+    backgroundColor: "#05c46b",
     paddingHorizontal: 15,
     paddingVertical: 5,
     borderRadius: 100,
   },
   buttonText: {
-    color: "#1a1a1a",
+    color: "#fff",
     fontSize: 32,
   },
   logo: {
@@ -103,7 +111,7 @@ const homepageStyles = StyleSheet.create({
 const guessingStyle = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#C0FFEE",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -114,6 +122,7 @@ const guessingStyle = StyleSheet.create({
   },
   word: {
     fontSize: 35,
+    fontFamily: "Pacifico",
   },
   lettersContainer: {
     display: "flex",
@@ -125,7 +134,7 @@ const guessingStyle = StyleSheet.create({
     justifyContent: "center",
   },
   letterButton: {
-    backgroundColor: "#C0FFEE",
+    backgroundColor: "#1e272e",
     marginHorizontal: 6,
     marginVertical: 6,
     width: 40,
@@ -135,10 +144,12 @@ const guessingStyle = StyleSheet.create({
   letter: {
     textAlign: "center",
     fontSize: 30,
+    color: "white",
   },
   usedLetter: {
     textAlign: "center",
     fontSize: 30,
+    color: "white",
     opacity: 0.1,
   },
 });
