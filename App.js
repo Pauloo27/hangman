@@ -166,7 +166,7 @@ export default function App() {
           onPress={handleHelp}
         >
           <Ionicons
-            size={25}
+            size={20}
             style={
               score === 0
                 ? guessingStyle.helpIconDisabled
@@ -254,14 +254,14 @@ const guessingStyle = StyleSheet.create({
   },
   category: {
     position: "absolute",
-    top: 50,
-    fontSize: 40,
+    top: 30,
+    fontSize: 30,
   },
   score: {
     position: "absolute",
     top: 5,
     left: 10,
-    fontSize: 25,
+    fontSize: 20,
   },
   helpContainer: {
     position: "absolute",
@@ -277,17 +277,20 @@ const guessingStyle = StyleSheet.create({
   },
   button: {
     backgroundColor: "#05c46b",
-    paddingHorizontal: 15,
-    paddingVertical: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
     borderRadius: 100,
+    marginBottom: 250,
   },
   buttonText: {
     color: "#fff",
-    fontSize: 32,
+    fontSize: 20,
   },
   word: {
-    fontSize: 35,
+    fontSize: 30,
     fontFamily: "Pacifico",
+    position: "absolute",
+    top: 200,
   },
   lettersContainer: {
     display: "flex",
@@ -300,11 +303,11 @@ const guessingStyle = StyleSheet.create({
   },
   letterButton: {
     backgroundColor: "#1e272e",
-    marginHorizontal: 6,
-    marginVertical: 6,
+    marginHorizontal: 3,
+    marginVertical: 3,
     width: 40,
     borderRadius: 3,
-    paddingHorizontal: 5,
+    paddingHorizontal: 0,
   },
   letter: {
     textAlign: "center",
@@ -318,7 +321,9 @@ const guessingStyle = StyleSheet.create({
     opacity: 0.1,
   },
   man: {
-    width: 170,
+    marginBottom: "auto",
+    marginTop: 50,
+    width: 100,
     resizeMode: "contain",
   },
 });
