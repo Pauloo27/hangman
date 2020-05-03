@@ -32,6 +32,8 @@ const images = {
   6: man6,
 };
 
+let lastWords = [];
+
 export default function App() {
   const [word, setWord] = React.useState(null);
   const [usedLetters, setUsedLetters] = React.useState([]);
@@ -89,7 +91,17 @@ export default function App() {
         });
       }
     }
-    return words[Math.floor(Math.random() * words.length)];
+    let word;
+    do {
+      word = words[Math.floor(Math.random() * words.length)];
+    } while (lastWords.includes(word));
+    lastWords.push(word);
+    if (lastWords.length > words.length / 2) {
+      lastWords = lastWords.slice(
+        lastWords.length - Math.floor(words.length / 2)
+      );
+    }
+    return word;
   };
 
   const startNewGame = () => {
