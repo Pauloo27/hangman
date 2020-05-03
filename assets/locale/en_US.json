@@ -1,0 +1,10 @@
+{
+  "Menu": {
+    "start": "Start",
+    "playAgain": "Play again"
+  },
+  "Words": {
+    "Animal": ["dog", "cat", "bat", "horse", "cow", "zebra"],
+    "Food": ["rice", "beans", "hot dog", "pizza", "lasagna"]
+  }
+}

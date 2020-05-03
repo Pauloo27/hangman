@@ -1,0 +1,42 @@
+{
+  "Menu": {
+    "start": "Jogar",
+    "playAgain": "Jogar novamente"
+  },
+  "Words": {
+    "Animal": [
+      "cachorro",
+      "gato",
+      "morcego",
+      "cavalo",
+      "vaca",
+      "zebra",
+      "leao",
+      "hipopotamo",
+      "tigre"
+    ],
+    "Comida": ["arroz", "feijao", "pizza", "macarrao", "alface", "bife"],
+    "Cor": [
+      "amarelo",
+      "azul",
+      "verde",
+      "vermelho",
+      "roxo",
+      "rosa",
+      "cinza",
+      "dourado",
+      "preto",
+      "laranja"
+    ],
+    "Lugar": [
+      "sao paulo",
+      "rio de janeiro",
+      "manaus",
+      "olinda",
+      "esperito santo",
+      "curitiba",
+      "paris",
+      "roma"
+    ]
+  }
+}
