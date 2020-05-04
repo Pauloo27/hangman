@@ -302,17 +302,17 @@ const guessingStyle = StyleSheet.create({
     justifyContent: "center",
   },
   letterButton: {
-    backgroundColor: "#1e272e",
+    backgroundColor: "#fff",
     marginHorizontal: 3,
     marginVertical: 3,
     width: 40,
-    borderRadius: 3,
+    borderRadius: 10,
     paddingHorizontal: 0,
   },
   letter: {
     textAlign: "center",
     fontSize: 30,
-    color: "white",
+    color: "#000",
   },
   usedLetter: {
     textAlign: "center",
